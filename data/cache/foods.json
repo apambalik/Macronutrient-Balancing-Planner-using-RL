@@ -1,0 +1,230 @@
+[
+  {
+    "food_id": "chicken_breast",
+    "name": "Chicken Breast",
+    "category": "protein",
+    "calories": 165,
+    "protein": 31.0,
+    "carbs": 0.0,
+    "fats": 3.6,
+    "fiber": 0.0,
+    "sugar": 0.0,
+    "sodium": 74.0,
+    "serving_size": "100g",
+    "allergens": [],
+    "tags": [
+      "lean",
+      "high_protein"
+    ]
+  },
+  {
+    "food_id": "salmon",
+    "name": "Salmon",
+    "category": "protein",
+    "calories": 208,
+    "protein": 25.0,
+    "carbs": 0.0,
+    "fats": 12.0,
+    "fiber": 0.0,
+    "sugar": 0.0,
+    "sodium": 59.0,
+    "serving_size": "100g",
+    "allergens": [
+      "fish"
+    ],
+    "tags": [
+      "omega3",
+      "healthy_fats"
+    ]
+  },
+  {
+    "food_id": "brown_rice",
+    "name": "Brown Rice",
+    "category": "grains",
+    "calories": 111,
+    "protein": 2.6,
+    "carbs": 23.0,
+    "fats": 0.9,
+    "fiber": 1.8,
+    "sugar": 0.4,
+    "sodium": 5.0,
+    "serving_size": "100g",
+    "allergens": [],
+    "tags": [
+      "whole_grain",
+      "fiber"
+    ]
+  },
+  {
+    "food_id": "quinoa",
+    "name": "Quinoa",
+    "category": "grains",
+    "calories": 120,
+    "protein": 4.4,
+    "carbs": 22.0,
+    "fats": 1.9,
+    "fiber": 2.8,
+    "sugar": 0.9,
+    "sodium": 7.0,
+    "serving_size": "100g",
+    "allergens": [],
+    "tags": [
+      "complete_protein",
+      "gluten_free"
+    ]
+  },
+  {
+    "food_id": "broccoli",
+    "name": "Broccoli",
+    "category": "vegetables",
+    "calories": 34,
+    "protein": 2.8,
+    "carbs": 7.0,
+    "fats": 0.4,
+    "fiber": 2.6,
+    "sugar": 1.5,
+    "sodium": 33.0,
+    "serving_size": "100g",
+    "allergens": [],
+    "tags": [
+      "vitamin_c",
+      "fiber",
+      "antioxidants"
+    ]
+  },
+  {
+    "food_id": "spinach",
+    "name": "Spinach",
+    "category": "vegetables",
+    "calories": 23,
+    "protein": 2.9,
+    "carbs": 3.6,
+    "fats": 0.4,
+    "fiber": 2.2,
+    "sugar": 0.4,
+    "sodium": 79.0,
+    "serving_size": "100g",
+    "allergens": [],
+    "tags": [
+      "iron",
+      "vitamin_k",
+      "low_calorie"
+    ]
+  },
+  {
+    "food_id": "sweet_potato",
+    "name": "Sweet Potato",
+    "category": "vegetables",
+    "calories": 86,
+    "protein": 1.6,
+    "carbs": 20.0,
+    "fats": 0.1,
+    "fiber": 3.0,
+    "sugar": 4.2,
+    "sodium": 55.0,
+    "serving_size": "100g",
+    "allergens": [],
+    "tags": [
+      "vitamin_a",
+      "complex_carbs"
+    ]
+  },
+  {
+    "food_id": "avocado",
+    "name": "Avocado",
+    "category": "fruits",
+    "calories": 160,
+    "protein": 2.0,
+    "carbs": 9.0,
+    "fats": 15.0,
+    "fiber": 6.7,
+    "sugar": 0.7,
+    "sodium": 7.0,
+    "serving_size": "100g",
+    "allergens": [],
+    "tags": [
+      "healthy_fats",
+      "fiber",
+      "potassium"
+    ]
+  },
+  {
+    "food_id": "banana",
+    "name": "Banana",
+    "category": "fruits",
+    "calories": 89,
+    "protein": 1.1,
+    "carbs": 23.0,
+    "fats": 0.3,
+    "fiber": 2.6,
+    "sugar": 12.0,
+    "sodium": 1.0,
+    "serving_size": "100g",
+    "allergens": [],
+    "tags": [
+      "potassium",
+      "natural_sugar"
+    ]
+  },
+  {
+    "food_id": "greek_yogurt",
+    "name": "Greek Yogurt",
+    "category": "dairy",
+    "calories": 59,
+    "protein": 10.0,
+    "carbs": 3.6,
+    "fats": 0.4,
+    "fiber": 0.0,
+    "sugar": 3.2,
+    "sodium": 36.0,
+    "serving_size": "100g",
+    "allergens": [
+      "milk"
+    ],
+    "tags": [
+      "probiotics",
+      "high_protein"
+    ]
+  },
+  {
+    "food_id": "eggs",
+    "name": "Eggs",
+    "category": "protein",
+    "calories": 155,
+    "protein": 13.0,
+    "carbs": 1.1,
+    "fats": 11.0,
+    "fiber": 0.0,
+    "sugar": 1.1,
+    "sodium": 124.0,
+    "serving_size": "100g",
+    "allergens": [
+      "eggs"
+    ],
+    "tags": [
+      "complete_protein",
+      "vitamin_d"
+    ]
+  },
+  {
+    "food_id": "almonds",
+    "name": "Almonds",
+    "category": "nuts",
+    "calories": 579,
+    "protein": 21.0,
+    "carbs": 22.0,
+    "fats": 50.0,
+    "fiber": 12.5,
+    "sugar": 4.8,
+    "sodium": 1.0,
+    "serving_size": "100g",
+    "allergens": [
+      "tree_nuts"
+    ],
+    "tags": [
+      "healthy_fats",
+      "vitamin_e",
+      "magnesium"
+    ]
+  }
+]
