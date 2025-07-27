@@ -1,0 +1,97 @@
+# Macronutrient Balancing Planner Configuration
+
+# Data settings
+data:
+  cache_dir: "cache"
+  food_cache_file: "food_cache.json"
+  food_database_file: "food_database.pkl"
+  api:
+    base_url: "https://world.openfoodfacts.org"
+    timeout: 30
+    max_retries: 3
+    batch_size: 50
+
+# Environment settings
+environment:
+  max_steps_per_episode: 20
+  max_daily_meals: 5
+  target_calories: 2000
+  macro_ratios:
+    protein: 0.25
+    carbohydrates: 0.45
+    fat: 0.30
+  
+  # Reward function weights
+  rewards:
+    macro_balance: 1.0
+    calorie_target: 1.0
+    variety: 0.5
+    nutritional_quality: 0.3
+  
+  # Penalties
+  penalties:
+    calorie_excess: -2.0
+    calorie_deficit: -1.5
+    macro_imbalance: -1.0
+
+# Agent settings
+agent:
+  algorithm: "PPO"
+  hidden_size: 256
+  learning_rate: 0.0003
+  gamma: 0.99
+  tau: 0.95  # GAE parameter
+  eps_clip: 0.2
+  value_coef: 0.5
+  entropy_coef: 0.01
+  max_grad_norm: 0.5
+
+# Training settings
+training:
+  num_episodes: 1000
+  update_frequency: 10
+  batch_size: 64
+  epochs_per_update: 10
+  save_frequency: 100
+  log_frequency: 10
+  success_threshold: 0.8
+
+# Evaluation settings
+evaluation:
+  num_eval_episodes: 20
+  eval_frequency: 100
+  metrics:
+    - "average_reward"
+    - "success_rate"
+    - "macro_balance_accuracy"
+    - "calorie_accuracy"
+    - "meal_variety"
+    - "nutritional_quality"
+
+# Baseline settings
+baselines:
+  random:
+    enabled: true
+    seed: 42
+  greedy:
+    enabled: true
+    macro_priority: [0.25, 0.45, 0.30]  # protein, carbs, fat
+  heuristic:
+    enabled: true
+    rules:
+      - "prioritize_protein"
+      - "balance_macros"
+      - "minimize_calories"
+
+
+# Logging settings
+logging:
+  level: "INFO"
+  log_file: "training.log"
+  console_output: true
+
+# Model settings
+model:
+  save_path: "models"
+  checkpoint_frequency: 50
+  keep_best_only: true 
