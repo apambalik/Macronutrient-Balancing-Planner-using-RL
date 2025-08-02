@@ -1,0 +1,496 @@
+2025-07-27 21:25:08,031 - src.config - INFO - Created necessary directories
+2025-07-27 21:25:08,056 - __main__ - INFO - Starting Macronutrient Balancing Planner with RL
+2025-07-27 21:25:08,056 - __main__ - INFO - Mode: train
+2025-07-27 21:25:08,056 - __main__ - INFO - Configuration: config.yaml
+2025-07-27 21:25:08,056 - __main__ - INFO - Initializing system components...
+2025-07-27 21:25:08,056 - __main__ - INFO - Setting up food database...
+2025-07-27 21:25:08,058 - src.data_loader - INFO - Fetching food data from Open Food Facts...
+2025-07-27 21:25:08,061 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): world.openfoodfacts.org:443
+2025-07-27 21:25:11,830 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=chicken&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:12,210 - src.data_loader - INFO - Found 50 products for query: chicken
+2025-07-27 21:25:13,246 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=beef&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:13,605 - src.data_loader - INFO - Found 49 products for query: beef
+2025-07-27 21:25:14,593 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=fish&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:14,810 - src.data_loader - INFO - Found 48 products for query: fish
+2025-07-27 21:25:16,719 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=eggs&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:17,121 - src.data_loader - INFO - Found 47 products for query: eggs
+2025-07-27 21:25:18,124 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=tofu&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:18,511 - src.data_loader - INFO - Found 49 products for query: tofu
+2025-07-27 21:25:19,921 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=rice&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:20,173 - src.data_loader - INFO - Found 49 products for query: rice
+2025-07-27 21:25:21,175 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=pasta&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:21,581 - src.data_loader - INFO - Found 50 products for query: pasta
+2025-07-27 21:25:22,531 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=bread&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:22,790 - src.data_loader - INFO - Found 49 products for query: bread
+2025-07-27 21:25:24,662 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=oats&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:25,114 - src.data_loader - INFO - Found 50 products for query: oats
+2025-07-27 21:25:26,106 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=quinoa&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:26,538 - src.data_loader - INFO - Found 50 products for query: quinoa
+2025-07-27 21:25:27,502 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=apple&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:27,767 - src.data_loader - INFO - Found 50 products for query: apple
+2025-07-27 21:25:28,685 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=banana&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:28,969 - src.data_loader - INFO - Found 45 products for query: banana
+2025-07-27 21:25:30,501 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=broccoli&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:30,798 - src.data_loader - INFO - Found 46 products for query: broccoli
+2025-07-27 21:25:31,767 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=spinach&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:32,249 - src.data_loader - INFO - Found 50 products for query: spinach
+2025-07-27 21:25:33,201 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=milk&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:33,684 - src.data_loader - INFO - Found 49 products for query: milk
+2025-07-27 21:25:34,817 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=cheese&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:35,311 - src.data_loader - INFO - Found 48 products for query: cheese
+2025-07-27 21:25:36,238 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=yogurt&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:36,744 - src.data_loader - INFO - Found 48 products for query: yogurt
+2025-07-27 21:25:38,983 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=olive+oil&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:39,306 - src.data_loader - INFO - Found 50 products for query: olive oil
+2025-07-27 21:25:40,505 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=nuts&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:41,014 - src.data_loader - INFO - Found 49 products for query: nuts
+2025-07-27 21:25:42,371 - urllib3.connectionpool - DEBUG - https://world.openfoodfacts.org:443 "GET /cgi/search.pl?search_terms=avocado&search_simple=1&action=process&json=1&page_size=50&fields=code%2Cproduct_name%2Cbrands%2Ccategories_tags%2Cnutriments%2Cingredients_text%2Callergens_tags%2Cnutrition_grades HTTP/1.1" 200 None
+2025-07-27 21:25:42,718 - src.data_loader - INFO - Found 42 products for query: avocado
+2025-07-27 21:25:43,220 - src.data_loader - INFO - Saved database with 901 foods
+2025-07-27 21:25:43,220 - src.data_loader - INFO - Database populated with 901 total food items
+2025-07-27 21:25:43,220 - __main__ - INFO - Database ready with 901 food items
+2025-07-27 21:25:43,220 - __main__ - INFO - User profile created: {'personal_info': {'age': 30, 'gender': 'male', 'weight': 75.0, 'height': 180.0, 'activity_level': 'MODERATELY_ACTIVE', 'bmi': 23.1, 'bmi_category': 'Normal weight'}, 'goals': {'weight_goal': 'maintain', 'target_calories': 2200, 'bmr': 1730, 'macro_ratios': (0.25, 0.45, 0.3), 'macro_grams': (137.5, 247.5, 73.3)}, 'preferences': {'liked_categories': ['chicken', 'rice', 'vegetables'], 'disliked_foods': ['liver'], 'dietary_restrictions': [], 'allergens': []}, 'health_conditions': []}
+2025-07-27 21:25:43,220 - __main__ - INFO - Starting training pipeline...
+2025-07-27 21:25:43,220 - __main__ - ERROR - Failed to import environment: No module named 'src.environment'
+2025-07-27 21:25:43,220 - __main__ - INFO - Creating mock environment for testing...
+2025-07-27 21:25:43,360 - __main__ - ERROR - Failed to import agent: No module named 'src.agent'
+2025-07-27 21:25:43,360 - __main__ - INFO - Creating mock agent for testing...
+2025-07-27 21:25:43,360 - __main__ - INFO - Training agent for 100 episodes...
+2025-07-27 21:25:43,360 - __main__ - INFO - Mock training for 100 episodes...
+2025-07-27 21:25:43,360 - __main__ - INFO - Episode 0: Reward=-0.003
+2025-07-27 21:25:43,360 - __main__ - INFO - Mock training completed
+2025-07-27 21:25:43,360 - __main__ - INFO - Mock save to models\trained_agent.pth
+2025-07-27 21:25:43,360 - __main__ - INFO - Training completed successfully
+2025-07-27 21:25:43,360 - __main__ - INFO - Starting evaluation pipeline...
+2025-07-27 21:25:43,360 - __main__ - INFO - Evaluating trained agent...
+2025-07-27 21:25:43,360 - __main__ - INFO - Running baseline comparisons...
+2025-07-27 21:25:43,360 - src.evaluation - INFO - Evaluating RL agent...
+2025-07-27 21:25:43,371 - src.evaluation - INFO - Evaluating Random agent...
+2025-07-27 21:25:43,375 - src.evaluation - INFO - Random - Avg Reward: -3.817, Success Rate: 0.300
+2025-07-27 21:25:43,375 - src.evaluation - INFO - Evaluating Greedy agent...
+2025-07-27 21:25:43,809 - src.evaluation - INFO - Greedy - Avg Reward: -9.434, Success Rate: 0.000
+2025-07-27 21:25:43,809 - src.evaluation - INFO - Evaluating Heuristic agent...
+2025-07-27 21:25:44,310 - src.evaluation - INFO - Heuristic - Avg Reward: -9.348, Success Rate: 0.000
+2025-07-27 21:25:44,310 - __main__ - INFO - Evaluation completed successfully
+2025-07-27 21:25:44,310 - __main__ - INFO - Generating reports and visualizations...
+2025-07-27 21:25:44,867 - src.visualization - INFO - Saved plot: plots\training_dashboard_training.html
+2025-07-27 21:25:44,909 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:25:46,139 - __main__ - ERROR - Training failed with error: Mime type rendering requires nbformat>=4.2.0 but it is not installed
+2025-07-27 21:26:24,354 - src.config - INFO - Created necessary directories
+2025-07-27 21:26:24,356 - __main__ - INFO - Starting Macronutrient Balancing Planner with RL
+2025-07-27 21:26:24,356 - __main__ - INFO - Mode: train
+2025-07-27 21:26:24,356 - __main__ - INFO - Configuration: config.yaml
+2025-07-27 21:26:24,356 - __main__ - INFO - Initializing system components...
+2025-07-27 21:26:24,357 - __main__ - INFO - Setting up food database...
+2025-07-27 21:26:24,390 - src.data_loader - INFO - Loaded 20 items from cache
+2025-07-27 21:26:24,503 - src.data_loader - INFO - Loaded 901 foods from cache
+2025-07-27 21:26:24,503 - src.data_loader - INFO - Database already populated with 901 foods
+2025-07-27 21:26:24,504 - __main__ - INFO - Database ready with 901 food items
+2025-07-27 21:26:24,504 - __main__ - INFO - User profile created: {'personal_info': {'age': 30, 'gender': 'male', 'weight': 75.0, 'height': 180.0, 'activity_level': 'MODERATELY_ACTIVE', 'bmi': 23.1, 'bmi_category': 'Normal weight'}, 'goals': {'weight_goal': 'maintain', 'target_calories': 2200, 'bmr': 1730, 'macro_ratios': (0.25, 0.45, 0.3), 'macro_grams': (137.5, 247.5, 73.3)}, 'preferences': {'liked_categories': ['chicken', 'rice', 'vegetables'], 'disliked_foods': ['liver'], 'dietary_restrictions': [], 'allergens': []}, 'health_conditions': []}
+2025-07-27 21:26:24,504 - __main__ - INFO - Starting training pipeline...
+2025-07-27 21:26:24,504 - __main__ - ERROR - Failed to import environment: No module named 'src.environment'
+2025-07-27 21:26:24,504 - __main__ - INFO - Creating mock environment for testing...
+2025-07-27 21:26:24,539 - __main__ - ERROR - Failed to import agent: No module named 'src.agent'
+2025-07-27 21:26:24,539 - __main__ - INFO - Creating mock agent for testing...
+2025-07-27 21:26:24,539 - __main__ - INFO - Training agent for 1000 episodes...
+2025-07-27 21:26:24,539 - __main__ - INFO - Mock training for 1000 episodes...
+2025-07-27 21:26:24,540 - __main__ - INFO - Episode 0: Reward=-0.003
+2025-07-27 21:26:24,540 - __main__ - INFO - Episode 100: Reward=-2.419
+2025-07-27 21:26:24,540 - __main__ - INFO - Episode 200: Reward=0.454
+2025-07-27 21:26:24,540 - __main__ - INFO - Episode 300: Reward=-1.506
+2025-07-27 21:26:24,541 - __main__ - INFO - Episode 400: Reward=-2.567
+2025-07-27 21:26:24,541 - __main__ - INFO - Episode 500: Reward=-2.972
+2025-07-27 21:26:24,541 - __main__ - INFO - Episode 600: Reward=-0.486
+2025-07-27 21:26:24,541 - __main__ - INFO - Episode 700: Reward=0.122
+2025-07-27 21:26:24,542 - __main__ - INFO - Episode 800: Reward=0.084
+2025-07-27 21:26:24,542 - __main__ - INFO - Episode 900: Reward=-0.504
+2025-07-27 21:26:24,542 - __main__ - INFO - Mock training completed
+2025-07-27 21:26:24,543 - __main__ - INFO - Mock save to models\trained_agent.pth
+2025-07-27 21:26:24,543 - __main__ - INFO - Training completed successfully
+2025-07-27 21:26:24,543 - __main__ - INFO - Starting evaluation pipeline...
+2025-07-27 21:26:24,543 - __main__ - INFO - Evaluating trained agent...
+2025-07-27 21:26:24,550 - __main__ - INFO - Running baseline comparisons...
+2025-07-27 21:26:24,551 - src.evaluation - INFO - Evaluating RL agent...
+2025-07-27 21:26:24,557 - src.evaluation - INFO - Evaluating Random agent...
+2025-07-27 21:26:24,563 - src.evaluation - INFO - Random - Avg Reward: -3.096, Success Rate: 0.350
+2025-07-27 21:26:24,563 - src.evaluation - INFO - Evaluating Greedy agent...
+2025-07-27 21:26:25,444 - src.evaluation - INFO - Greedy - Avg Reward: -9.448, Success Rate: 0.000
+2025-07-27 21:26:25,444 - src.evaluation - INFO - Evaluating Heuristic agent...
+2025-07-27 21:26:26,445 - src.evaluation - INFO - Heuristic - Avg Reward: -9.405, Success Rate: 0.000
+2025-07-27 21:26:26,445 - __main__ - INFO - Evaluation completed successfully
+2025-07-27 21:26:26,445 - __main__ - INFO - Generating reports and visualizations...
+2025-07-27 21:26:26,573 - src.visualization - INFO - Saved plot: plots\training_dashboard_training.html
+2025-07-27 21:26:26,596 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:26:27,706 - __main__ - ERROR - Training failed with error: Mime type rendering requires nbformat>=4.2.0 but it is not installed
+2025-07-27 21:27:13,649 - src.config - INFO - Created necessary directories
+2025-07-27 21:27:13,665 - __main__ - INFO - Starting Macronutrient Balancing Planner with RL
+2025-07-27 21:27:13,665 - __main__ - INFO - Mode: train
+2025-07-27 21:27:13,665 - __main__ - INFO - Configuration: config.yaml
+2025-07-27 21:27:13,665 - __main__ - INFO - Initializing system components...
+2025-07-27 21:27:13,665 - __main__ - INFO - Setting up food database...
+2025-07-27 21:27:13,689 - src.data_loader - INFO - Loaded 20 items from cache
+2025-07-27 21:27:13,791 - src.data_loader - INFO - Loaded 901 foods from cache
+2025-07-27 21:27:13,791 - src.data_loader - INFO - Database already populated with 901 foods
+2025-07-27 21:27:13,792 - __main__ - INFO - Database ready with 901 food items
+2025-07-27 21:27:13,792 - __main__ - INFO - User profile created: {'personal_info': {'age': 30, 'gender': 'male', 'weight': 75.0, 'height': 180.0, 'activity_level': 'MODERATELY_ACTIVE', 'bmi': 23.1, 'bmi_category': 'Normal weight'}, 'goals': {'weight_goal': 'maintain', 'target_calories': 2200, 'bmr': 1730, 'macro_ratios': (0.25, 0.45, 0.3), 'macro_grams': (137.5, 247.5, 73.3)}, 'preferences': {'liked_categories': ['chicken', 'rice', 'vegetables'], 'disliked_foods': ['liver'], 'dietary_restrictions': [], 'allergens': []}, 'health_conditions': []}
+2025-07-27 21:27:13,793 - __main__ - INFO - Starting training pipeline...
+2025-07-27 21:27:13,793 - __main__ - ERROR - Failed to import environment: No module named 'src.environment'
+2025-07-27 21:27:13,793 - __main__ - INFO - Creating mock environment for testing...
+2025-07-27 21:27:13,825 - __main__ - ERROR - Failed to import agent: No module named 'src.agent'
+2025-07-27 21:27:13,832 - __main__ - INFO - Creating mock agent for testing...
+2025-07-27 21:27:13,832 - __main__ - INFO - Training agent for 1000 episodes...
+2025-07-27 21:27:13,832 - __main__ - INFO - Mock training for 1000 episodes...
+2025-07-27 21:27:13,832 - __main__ - INFO - Episode 0: Reward=-0.003
+2025-07-27 21:27:13,832 - __main__ - INFO - Episode 100: Reward=-2.419
+2025-07-27 21:27:13,832 - __main__ - INFO - Episode 200: Reward=0.454
+2025-07-27 21:27:13,832 - __main__ - INFO - Episode 300: Reward=-1.506
+2025-07-27 21:27:13,832 - __main__ - INFO - Episode 400: Reward=-2.567
+2025-07-27 21:27:13,832 - __main__ - INFO - Episode 500: Reward=-2.972
+2025-07-27 21:27:13,832 - __main__ - INFO - Episode 600: Reward=-0.486
+2025-07-27 21:27:13,832 - __main__ - INFO - Episode 700: Reward=0.122
+2025-07-27 21:27:13,832 - __main__ - INFO - Episode 800: Reward=0.084
+2025-07-27 21:27:13,834 - __main__ - INFO - Episode 900: Reward=-0.504
+2025-07-27 21:27:13,834 - __main__ - INFO - Mock training completed
+2025-07-27 21:27:13,834 - __main__ - INFO - Mock save to models\trained_agent.pth
+2025-07-27 21:27:13,834 - __main__ - INFO - Training completed successfully
+2025-07-27 21:27:13,835 - __main__ - INFO - Starting evaluation pipeline...
+2025-07-27 21:27:13,835 - __main__ - INFO - Evaluating trained agent...
+2025-07-27 21:27:13,842 - __main__ - INFO - Running baseline comparisons...
+2025-07-27 21:27:13,842 - src.evaluation - INFO - Evaluating RL agent...
+2025-07-27 21:27:13,850 - src.evaluation - INFO - Evaluating Random agent...
+2025-07-27 21:27:13,856 - src.evaluation - INFO - Random - Avg Reward: -3.096, Success Rate: 0.350
+2025-07-27 21:27:13,856 - src.evaluation - INFO - Evaluating Greedy agent...
+2025-07-27 21:27:14,739 - src.evaluation - INFO - Greedy - Avg Reward: -9.448, Success Rate: 0.000
+2025-07-27 21:27:14,739 - src.evaluation - INFO - Evaluating Heuristic agent...
+2025-07-27 21:27:15,726 - src.evaluation - INFO - Heuristic - Avg Reward: -9.405, Success Rate: 0.000
+2025-07-27 21:27:15,726 - __main__ - INFO - Evaluation completed successfully
+2025-07-27 21:27:15,726 - __main__ - INFO - Generating reports and visualizations...
+2025-07-27 21:27:15,862 - src.visualization - INFO - Saved plot: plots\training_dashboard_training.html
+2025-07-27 21:27:15,886 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:27:16,936 - __main__ - ERROR - Training failed with error: Mime type rendering requires nbformat>=4.2.0 but it is not installed
+2025-07-27 21:28:08,082 - src.config - INFO - Created necessary directories
+2025-07-27 21:28:08,101 - __main__ - INFO - Starting Macronutrient Balancing Planner with RL
+2025-07-27 21:28:08,101 - __main__ - INFO - Mode: train
+2025-07-27 21:28:08,101 - __main__ - INFO - Configuration: config.yaml
+2025-07-27 21:28:08,101 - __main__ - INFO - Initializing system components...
+2025-07-27 21:28:08,101 - __main__ - INFO - Setting up food database...
+2025-07-27 21:28:08,127 - src.data_loader - INFO - Loaded 20 items from cache
+2025-07-27 21:28:08,228 - src.data_loader - INFO - Loaded 901 foods from cache
+2025-07-27 21:28:08,228 - src.data_loader - INFO - Database already populated with 901 foods
+2025-07-27 21:28:08,228 - __main__ - INFO - Database ready with 901 food items
+2025-07-27 21:28:08,228 - __main__ - INFO - User profile created: {'personal_info': {'age': 30, 'gender': 'male', 'weight': 75.0, 'height': 180.0, 'activity_level': 'MODERATELY_ACTIVE', 'bmi': 23.1, 'bmi_category': 'Normal weight'}, 'goals': {'weight_goal': 'maintain', 'target_calories': 2200, 'bmr': 1730, 'macro_ratios': (0.25, 0.45, 0.3), 'macro_grams': (137.5, 247.5, 73.3)}, 'preferences': {'liked_categories': ['chicken', 'rice', 'vegetables'], 'disliked_foods': ['liver'], 'dietary_restrictions': [], 'allergens': []}, 'health_conditions': []}
+2025-07-27 21:28:08,228 - __main__ - INFO - Starting training pipeline...
+2025-07-27 21:28:08,228 - __main__ - ERROR - Failed to import environment: No module named 'src.environment'
+2025-07-27 21:28:08,228 - __main__ - INFO - Creating mock environment for testing...
+2025-07-27 21:28:08,730 - __main__ - ERROR - Failed to import agent: No module named 'src.agent'
+2025-07-27 21:28:08,730 - __main__ - INFO - Creating mock agent for testing...
+2025-07-27 21:28:08,730 - __main__ - INFO - Training agent for 5 episodes...
+2025-07-27 21:28:08,730 - __main__ - INFO - Mock training for 5 episodes...
+2025-07-27 21:28:08,731 - __main__ - INFO - Episode 0: Reward=-0.003
+2025-07-27 21:28:08,731 - __main__ - INFO - Mock training completed
+2025-07-27 21:28:08,731 - __main__ - INFO - Mock save to models\trained_agent.pth
+2025-07-27 21:28:08,731 - __main__ - INFO - Training completed successfully
+2025-07-27 21:28:08,731 - __main__ - INFO - Training pipeline completed successfully
+2025-07-27 21:30:50,448 - src.config - INFO - Created necessary directories
+2025-07-27 21:30:50,450 - __main__ - INFO - Starting Macronutrient Balancing Planner with RL
+2025-07-27 21:30:50,450 - __main__ - INFO - Mode: train
+2025-07-27 21:30:50,451 - __main__ - INFO - Configuration: config.yaml
+2025-07-27 21:30:50,451 - __main__ - INFO - Initializing system components...
+2025-07-27 21:30:50,451 - __main__ - INFO - Setting up food database...
+2025-07-27 21:30:50,473 - src.data_loader - INFO - Loaded 20 items from cache
+2025-07-27 21:30:50,584 - src.data_loader - INFO - Loaded 901 foods from cache
+2025-07-27 21:30:50,584 - src.data_loader - INFO - Database already populated with 901 foods
+2025-07-27 21:30:50,584 - __main__ - INFO - Database ready with 901 food items
+2025-07-27 21:30:50,584 - __main__ - INFO - User profile created: {'personal_info': {'age': 30, 'gender': 'male', 'weight': 75.0, 'height': 180.0, 'activity_level': 'MODERATELY_ACTIVE', 'bmi': 23.1, 'bmi_category': 'Normal weight'}, 'goals': {'weight_goal': 'maintain', 'target_calories': 2200, 'bmr': 1730, 'macro_ratios': (0.25, 0.45, 0.3), 'macro_grams': (137.5, 247.5, 73.3)}, 'preferences': {'liked_categories': ['chicken', 'rice', 'vegetables'], 'disliked_foods': ['liver'], 'dietary_restrictions': [], 'allergens': []}, 'health_conditions': []}
+2025-07-27 21:30:50,585 - __main__ - INFO - Starting training pipeline...
+2025-07-27 21:30:50,585 - src.environment - DEBUG - Observation space: Box(-inf, inf, (20,), float32)
+2025-07-27 21:30:50,585 - src.environment - DEBUG - Action space: Box(0.0, 1.0, (2,), float32)
+2025-07-27 21:30:50,586 - src.environment - INFO - Environment initialized with 901 foods
+2025-07-27 21:30:50,586 - __main__ - INFO - Environment created with observation space: Box(-inf, inf, (20,), float32)
+2025-07-27 21:30:50,586 - __main__ - INFO - Action space: Box(0.0, 1.0, (2,), float32)
+2025-07-27 21:31:03,110 - src.agent - INFO - PPO Agent initialized on device: cpu
+2025-07-27 21:31:03,110 - src.agent - INFO - Network architecture: 20 -> 256 -> 2
+2025-07-27 21:31:03,110 - __main__ - INFO - PPO agent created successfully
+2025-07-27 21:31:03,111 - __main__ - INFO - Training agent for 5 episodes...
+2025-07-27 21:31:03,111 - __main__ - ERROR - Training failed with error: PPOAgent.train() missing 1 required positional argument: 'environment'
+2025-07-27 21:31:20,975 - src.config - INFO - Created necessary directories
+2025-07-27 21:31:20,977 - __main__ - INFO - Starting Macronutrient Balancing Planner with RL
+2025-07-27 21:31:20,977 - __main__ - INFO - Mode: train
+2025-07-27 21:31:20,977 - __main__ - INFO - Configuration: config.yaml
+2025-07-27 21:31:20,977 - __main__ - INFO - Initializing system components...
+2025-07-27 21:31:20,977 - __main__ - INFO - Setting up food database...
+2025-07-27 21:31:20,998 - src.data_loader - INFO - Loaded 20 items from cache
+2025-07-27 21:31:21,111 - src.data_loader - INFO - Loaded 901 foods from cache
+2025-07-27 21:31:21,111 - src.data_loader - INFO - Database already populated with 901 foods
+2025-07-27 21:31:21,112 - __main__ - INFO - Database ready with 901 food items
+2025-07-27 21:31:21,112 - __main__ - INFO - User profile created: {'personal_info': {'age': 30, 'gender': 'male', 'weight': 75.0, 'height': 180.0, 'activity_level': 'MODERATELY_ACTIVE', 'bmi': 23.1, 'bmi_category': 'Normal weight'}, 'goals': {'weight_goal': 'maintain', 'target_calories': 2200, 'bmr': 1730, 'macro_ratios': (0.25, 0.45, 0.3), 'macro_grams': (137.5, 247.5, 73.3)}, 'preferences': {'liked_categories': ['chicken', 'rice', 'vegetables'], 'disliked_foods': ['liver'], 'dietary_restrictions': [], 'allergens': []}, 'health_conditions': []}
+2025-07-27 21:31:21,112 - __main__ - INFO - Starting training pipeline...
+2025-07-27 21:31:21,113 - src.environment - DEBUG - Observation space: Box(-inf, inf, (20,), float32)
+2025-07-27 21:31:21,113 - src.environment - DEBUG - Action space: Box(0.0, 1.0, (2,), float32)
+2025-07-27 21:31:21,113 - src.environment - INFO - Environment initialized with 901 foods
+2025-07-27 21:31:21,113 - __main__ - INFO - Environment created with observation space: Box(-inf, inf, (20,), float32)
+2025-07-27 21:31:21,113 - __main__ - INFO - Action space: Box(0.0, 1.0, (2,), float32)
+2025-07-27 21:31:22,726 - src.agent - INFO - PPO Agent initialized on device: cpu
+2025-07-27 21:31:22,726 - src.agent - INFO - Network architecture: 20 -> 256 -> 2
+2025-07-27 21:31:22,726 - __main__ - INFO - PPO agent created successfully
+2025-07-27 21:31:22,727 - __main__ - INFO - Training agent for 5 episodes...
+2025-07-27 21:31:22,727 - src.agent - INFO - Starting PPO training for 5 episodes
+2025-07-27 21:31:22,753 - src.agent - INFO - Episode 0: Reward=3.377, Avg Reward=3.377, Success Rate=1.000
+2025-07-27 21:31:22,774 - src.agent - INFO - Training completed
+2025-07-27 21:31:22,809 - src.agent - INFO - Model saved to models\trained_agent.pth
+2025-07-27 21:31:22,809 - __main__ - INFO - Training completed successfully
+2025-07-27 21:31:22,809 - __main__ - INFO - Training pipeline completed successfully
+2025-07-27 21:31:37,160 - src.config - INFO - Created necessary directories
+2025-07-27 21:31:37,162 - __main__ - INFO - Starting Macronutrient Balancing Planner with RL
+2025-07-27 21:31:37,162 - __main__ - INFO - Mode: train
+2025-07-27 21:31:37,162 - __main__ - INFO - Configuration: config.yaml
+2025-07-27 21:31:37,162 - __main__ - INFO - Initializing system components...
+2025-07-27 21:31:37,162 - __main__ - INFO - Setting up food database...
+2025-07-27 21:31:37,186 - src.data_loader - INFO - Loaded 20 items from cache
+2025-07-27 21:31:37,302 - src.data_loader - INFO - Loaded 901 foods from cache
+2025-07-27 21:31:37,302 - src.data_loader - INFO - Database already populated with 901 foods
+2025-07-27 21:31:37,302 - __main__ - INFO - Database ready with 901 food items
+2025-07-27 21:31:37,302 - __main__ - INFO - User profile created: {'personal_info': {'age': 30, 'gender': 'male', 'weight': 75.0, 'height': 180.0, 'activity_level': 'MODERATELY_ACTIVE', 'bmi': 23.1, 'bmi_category': 'Normal weight'}, 'goals': {'weight_goal': 'maintain', 'target_calories': 2200, 'bmr': 1730, 'macro_ratios': (0.25, 0.45, 0.3), 'macro_grams': (137.5, 247.5, 73.3)}, 'preferences': {'liked_categories': ['chicken', 'rice', 'vegetables'], 'disliked_foods': ['liver'], 'dietary_restrictions': [], 'allergens': []}, 'health_conditions': []}
+2025-07-27 21:31:37,303 - __main__ - INFO - Starting training pipeline...
+2025-07-27 21:31:37,303 - src.environment - DEBUG - Observation space: Box(-inf, inf, (20,), float32)
+2025-07-27 21:31:37,303 - src.environment - DEBUG - Action space: Box(0.0, 1.0, (2,), float32)
+2025-07-27 21:31:37,304 - src.environment - INFO - Environment initialized with 901 foods
+2025-07-27 21:31:37,304 - __main__ - INFO - Environment created with observation space: Box(-inf, inf, (20,), float32)
+2025-07-27 21:31:37,304 - __main__ - INFO - Action space: Box(0.0, 1.0, (2,), float32)
+2025-07-27 21:31:38,909 - src.agent - INFO - PPO Agent initialized on device: cpu
+2025-07-27 21:31:38,911 - src.agent - INFO - Network architecture: 20 -> 256 -> 2
+2025-07-27 21:31:38,911 - __main__ - INFO - PPO agent created successfully
+2025-07-27 21:31:38,911 - __main__ - INFO - Training agent for 10 episodes...
+2025-07-27 21:31:38,911 - src.agent - INFO - Starting PPO training for 10 episodes
+2025-07-27 21:31:38,912 - src.agent - INFO - Episode 0: Reward=3.377, Avg Reward=3.377, Success Rate=1.000
+2025-07-27 21:31:38,955 - src.agent - INFO - Training completed
+2025-07-27 21:31:38,962 - src.agent - INFO - Model saved to models\trained_agent.pth
+2025-07-27 21:31:38,962 - __main__ - INFO - Training completed successfully
+2025-07-27 21:31:38,963 - __main__ - INFO - Starting evaluation pipeline...
+2025-07-27 21:31:38,963 - __main__ - INFO - Evaluating trained agent...
+2025-07-27 21:31:38,979 - __main__ - INFO - Running baseline comparisons...
+2025-07-27 21:31:38,979 - src.evaluation - INFO - Evaluating RL agent...
+2025-07-27 21:31:38,992 - src.evaluation - INFO - Evaluating Random agent...
+2025-07-27 21:31:38,996 - src.evaluation - INFO - Random - Avg Reward: -41.158, Success Rate: 0.000
+2025-07-27 21:31:38,996 - src.evaluation - INFO - Evaluating Greedy agent...
+2025-07-27 21:31:39,045 - src.evaluation - INFO - Greedy - Avg Reward: -126.299, Success Rate: 0.000
+2025-07-27 21:31:39,045 - src.evaluation - INFO - Evaluating Heuristic agent...
+2025-07-27 21:31:39,095 - src.evaluation - INFO - Heuristic - Avg Reward: -112.665, Success Rate: 0.000
+2025-07-27 21:31:39,095 - __main__ - INFO - Evaluation completed successfully
+2025-07-27 21:31:39,095 - __main__ - INFO - Generating reports and visualizations...
+2025-07-27 21:31:39,609 - __main__ - ERROR - Training failed with error: integer division or modulo by zero
+2025-07-27 21:32:00,896 - src.config - INFO - Created necessary directories
+2025-07-27 21:32:00,896 - __main__ - INFO - Starting Macronutrient Balancing Planner with RL
+2025-07-27 21:32:00,896 - __main__ - INFO - Mode: train
+2025-07-27 21:32:00,896 - __main__ - INFO - Configuration: config.yaml
+2025-07-27 21:32:00,896 - __main__ - INFO - Initializing system components...
+2025-07-27 21:32:00,896 - __main__ - INFO - Setting up food database...
+2025-07-27 21:32:00,923 - src.data_loader - INFO - Loaded 20 items from cache
+2025-07-27 21:32:01,054 - src.data_loader - INFO - Loaded 901 foods from cache
+2025-07-27 21:32:01,054 - src.data_loader - INFO - Database already populated with 901 foods
+2025-07-27 21:32:01,054 - __main__ - INFO - Database ready with 901 food items
+2025-07-27 21:32:01,054 - __main__ - INFO - User profile created: {'personal_info': {'age': 30, 'gender': 'male', 'weight': 75.0, 'height': 180.0, 'activity_level': 'MODERATELY_ACTIVE', 'bmi': 23.1, 'bmi_category': 'Normal weight'}, 'goals': {'weight_goal': 'maintain', 'target_calories': 2200, 'bmr': 1730, 'macro_ratios': (0.25, 0.45, 0.3), 'macro_grams': (137.5, 247.5, 73.3)}, 'preferences': {'liked_categories': ['chicken', 'rice', 'vegetables'], 'disliked_foods': ['liver'], 'dietary_restrictions': [], 'allergens': []}, 'health_conditions': []}
+2025-07-27 21:32:01,054 - __main__ - INFO - Starting training pipeline...
+2025-07-27 21:32:01,056 - src.environment - DEBUG - Observation space: Box(-inf, inf, (20,), float32)
+2025-07-27 21:32:01,056 - src.environment - DEBUG - Action space: Box(0.0, 1.0, (2,), float32)
+2025-07-27 21:32:01,056 - src.environment - INFO - Environment initialized with 901 foods
+2025-07-27 21:32:01,056 - __main__ - INFO - Environment created with observation space: Box(-inf, inf, (20,), float32)
+2025-07-27 21:32:01,056 - __main__ - INFO - Action space: Box(0.0, 1.0, (2,), float32)
+2025-07-27 21:32:02,730 - src.agent - INFO - PPO Agent initialized on device: cpu
+2025-07-27 21:32:02,730 - src.agent - INFO - Network architecture: 20 -> 256 -> 2
+2025-07-27 21:32:02,730 - __main__ - INFO - PPO agent created successfully
+2025-07-27 21:32:02,730 - __main__ - INFO - Training agent for 10 episodes...
+2025-07-27 21:32:02,730 - src.agent - INFO - Starting PPO training for 10 episodes
+2025-07-27 21:32:02,734 - src.agent - INFO - Episode 0: Reward=3.377, Avg Reward=3.377, Success Rate=1.000
+2025-07-27 21:32:02,777 - src.agent - INFO - Training completed
+2025-07-27 21:32:02,777 - src.agent - INFO - Model saved to models\trained_agent.pth
+2025-07-27 21:32:02,777 - __main__ - INFO - Training completed successfully
+2025-07-27 21:32:02,777 - __main__ - INFO - Starting evaluation pipeline...
+2025-07-27 21:32:02,777 - __main__ - INFO - Evaluating trained agent...
+2025-07-27 21:32:02,799 - __main__ - INFO - Running baseline comparisons...
+2025-07-27 21:32:02,799 - src.evaluation - INFO - Evaluating RL agent...
+2025-07-27 21:32:02,814 - src.evaluation - INFO - Evaluating Random agent...
+2025-07-27 21:32:02,816 - src.evaluation - INFO - Random - Avg Reward: -41.158, Success Rate: 0.000
+2025-07-27 21:32:02,816 - src.evaluation - INFO - Evaluating Greedy agent...
+2025-07-27 21:32:02,863 - src.evaluation - INFO - Greedy - Avg Reward: -126.299, Success Rate: 0.000
+2025-07-27 21:32:02,863 - src.evaluation - INFO - Evaluating Heuristic agent...
+2025-07-27 21:32:02,909 - src.evaluation - INFO - Heuristic - Avg Reward: -112.665, Success Rate: 0.000
+2025-07-27 21:32:02,922 - __main__ - INFO - Evaluation completed successfully
+2025-07-27 21:32:02,922 - __main__ - INFO - Generating reports and visualizations...
+2025-07-27 21:32:03,710 - src.visualization - INFO - Saved plot: plots\training_dashboard_training.html
+2025-07-27 21:32:03,808 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:33:39,676 - __main__ - ERROR - Training failed with error: Mime type rendering requires nbformat>=4.2.0 but it is not installed
+2025-07-27 21:34:42,122 - src.config - INFO - Created necessary directories
+2025-07-27 21:34:42,130 - __main__ - INFO - Starting Macronutrient Balancing Planner with RL
+2025-07-27 21:34:42,131 - __main__ - INFO - Mode: train
+2025-07-27 21:34:42,131 - __main__ - INFO - Configuration: config.yaml
+2025-07-27 21:34:42,131 - __main__ - INFO - Initializing system components...
+2025-07-27 21:34:42,131 - __main__ - INFO - Setting up food database...
+2025-07-27 21:34:42,155 - src.data_loader - INFO - Loaded 20 items from cache
+2025-07-27 21:34:42,256 - src.data_loader - INFO - Loaded 901 foods from cache
+2025-07-27 21:34:42,256 - src.data_loader - INFO - Database already populated with 901 foods
+2025-07-27 21:34:42,256 - __main__ - INFO - Database ready with 901 food items
+2025-07-27 21:34:42,256 - __main__ - INFO - User profile created: {'personal_info': {'age': 30, 'gender': 'male', 'weight': 75.0, 'height': 180.0, 'activity_level': 'MODERATELY_ACTIVE', 'bmi': 23.1, 'bmi_category': 'Normal weight'}, 'goals': {'weight_goal': 'maintain', 'target_calories': 2200, 'bmr': 1730, 'macro_ratios': (0.25, 0.45, 0.3), 'macro_grams': (137.5, 247.5, 73.3)}, 'preferences': {'liked_categories': ['chicken', 'rice', 'vegetables'], 'disliked_foods': ['liver'], 'dietary_restrictions': [], 'allergens': []}, 'health_conditions': []}
+2025-07-27 21:34:42,264 - __main__ - INFO - Starting training pipeline...
+2025-07-27 21:34:42,264 - src.environment - DEBUG - Observation space: Box(-inf, inf, (20,), float32)
+2025-07-27 21:34:42,264 - src.environment - DEBUG - Action space: Box(0.0, 1.0, (2,), float32)
+2025-07-27 21:34:42,264 - src.environment - INFO - Environment initialized with 901 foods
+2025-07-27 21:34:42,264 - __main__ - INFO - Environment created with observation space: Box(-inf, inf, (20,), float32)
+2025-07-27 21:34:42,264 - __main__ - INFO - Action space: Box(0.0, 1.0, (2,), float32)
+2025-07-27 21:34:43,875 - src.agent - INFO - PPO Agent initialized on device: cpu
+2025-07-27 21:34:43,877 - src.agent - INFO - Network architecture: 20 -> 256 -> 2
+2025-07-27 21:34:43,877 - __main__ - INFO - PPO agent created successfully
+2025-07-27 21:34:43,877 - __main__ - INFO - Training agent for 10 episodes...
+2025-07-27 21:34:43,877 - src.agent - INFO - Starting PPO training for 10 episodes
+2025-07-27 21:34:43,879 - src.agent - INFO - Episode 0: Reward=3.377, Avg Reward=3.377, Success Rate=1.000
+2025-07-27 21:34:43,915 - src.agent - INFO - Training completed
+2025-07-27 21:34:43,928 - src.agent - INFO - Model saved to models\trained_agent.pth
+2025-07-27 21:34:43,928 - __main__ - INFO - Training completed successfully
+2025-07-27 21:34:43,928 - __main__ - INFO - Starting evaluation pipeline...
+2025-07-27 21:34:43,928 - __main__ - INFO - Evaluating trained agent...
+2025-07-27 21:34:43,945 - __main__ - INFO - Running baseline comparisons...
+2025-07-27 21:34:43,946 - src.evaluation - INFO - Evaluating RL agent...
+2025-07-27 21:34:43,960 - src.evaluation - INFO - Evaluating Random agent...
+2025-07-27 21:34:43,963 - src.evaluation - INFO - Random - Avg Reward: -41.158, Success Rate: 0.000
+2025-07-27 21:34:43,963 - src.evaluation - INFO - Evaluating Greedy agent...
+2025-07-27 21:34:44,012 - src.evaluation - INFO - Greedy - Avg Reward: -126.299, Success Rate: 0.000
+2025-07-27 21:34:44,012 - src.evaluation - INFO - Evaluating Heuristic agent...
+2025-07-27 21:34:44,068 - src.evaluation - INFO - Heuristic - Avg Reward: -112.665, Success Rate: 0.000
+2025-07-27 21:34:44,069 - __main__ - INFO - Evaluation completed successfully
+2025-07-27 21:34:44,069 - __main__ - INFO - Generating reports and visualizations...
+2025-07-27 21:34:44,187 - src.visualization - INFO - Saved plot: plots\training_dashboard_training.html
+2025-07-27 21:34:44,213 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:34:44,300 - src.visualization - INFO - Saved plot: plots\training_dashboard_comparison.html
+2025-07-27 21:34:44,310 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:34:44,430 - src.visualization - INFO - Saved plot: plots\training_dashboard_nutrition.html
+2025-07-27 21:34:44,439 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:34:44,495 - src.visualization - INFO - Saved plot: plots\training_dashboard_variety.html
+2025-07-27 21:34:44,513 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:34:44,513 - src.visualization - INFO - Training dashboard created with 4 visualizations
+2025-07-27 21:34:44,599 - src.visualization - INFO - Saved plot: plots\convergence_analysis.html
+2025-07-27 21:34:44,614 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:34:44,644 - src.visualization - INFO - Data summary exported to: plots\data_summary.csv
+2025-07-27 21:34:44,646 - __main__ - INFO - Reports generated successfully
+2025-07-27 21:34:44,646 - __main__ - INFO - Training pipeline completed successfully
+2025-07-27 21:53:33,248 - src.config - INFO - Created necessary directories
+2025-07-27 21:53:33,251 - __main__ - INFO - Starting Macronutrient Balancing Planner with RL
+2025-07-27 21:53:33,251 - __main__ - INFO - Mode: train
+2025-07-27 21:53:33,251 - __main__ - INFO - Configuration: config.yaml
+2025-07-27 21:53:33,251 - __main__ - INFO - Initializing system components...
+2025-07-27 21:53:33,251 - __main__ - INFO - Setting up food database...
+2025-07-27 21:53:33,281 - src.data_loader - INFO - Loaded 20 items from cache
+2025-07-27 21:53:33,383 - src.data_loader - INFO - Loaded 901 foods from cache
+2025-07-27 21:53:33,383 - src.data_loader - INFO - Database already populated with 901 foods
+2025-07-27 21:53:33,384 - __main__ - INFO - Database ready with 901 food items
+2025-07-27 21:53:33,384 - __main__ - INFO - User profile created: {'personal_info': {'age': 30, 'gender': 'male', 'weight': 75.0, 'height': 180.0, 'activity_level': 'MODERATELY_ACTIVE', 'bmi': 23.1, 'bmi_category': 'Normal weight'}, 'goals': {'weight_goal': 'maintain', 'target_calories': 2200, 'bmr': 1730, 'macro_ratios': (0.25, 0.45, 0.3), 'macro_grams': (137.5, 247.5, 73.3)}, 'preferences': {'liked_categories': ['chicken', 'rice', 'vegetables'], 'disliked_foods': ['liver'], 'dietary_restrictions': [], 'allergens': []}, 'health_conditions': []}
+2025-07-27 21:53:33,384 - __main__ - INFO - Starting training pipeline...
+2025-07-27 21:53:33,385 - src.environment - DEBUG - Observation space: Box(-inf, inf, (20,), float32)
+2025-07-27 21:53:33,385 - src.environment - DEBUG - Action space: Box(0.0, 1.0, (2,), float32)
+2025-07-27 21:53:33,385 - src.environment - INFO - Environment initialized with 901 foods
+2025-07-27 21:53:33,385 - __main__ - INFO - Environment created with observation space: Box(-inf, inf, (20,), float32)
+2025-07-27 21:53:33,386 - __main__ - INFO - Action space: Box(0.0, 1.0, (2,), float32)
+2025-07-27 21:53:43,125 - src.agent - INFO - PPO Agent initialized on device: cpu
+2025-07-27 21:53:43,126 - src.agent - INFO - Network architecture: 20 -> 256 -> 2
+2025-07-27 21:53:43,126 - __main__ - INFO - PPO agent created successfully
+2025-07-27 21:53:43,126 - __main__ - INFO - Training agent for 10 episodes...
+2025-07-27 21:53:43,126 - src.agent - INFO - Starting PPO training for 10 episodes
+2025-07-27 21:53:43,169 - src.agent - INFO - Episode 0: Reward=3.377, Avg Reward=3.377, Success Rate=1.000
+2025-07-27 21:53:43,209 - src.agent - INFO - Training completed
+2025-07-27 21:53:43,240 - src.agent - INFO - Model saved to models\trained_agent.pth
+2025-07-27 21:53:43,240 - __main__ - INFO - Training completed successfully
+2025-07-27 21:53:43,240 - __main__ - INFO - Starting evaluation pipeline...
+2025-07-27 21:53:43,246 - __main__ - INFO - Evaluating trained agent...
+2025-07-27 21:53:43,262 - __main__ - INFO - Running baseline comparisons...
+2025-07-27 21:53:43,262 - src.evaluation - INFO - Evaluating RL agent...
+2025-07-27 21:53:43,276 - src.evaluation - INFO - Evaluating Random agent...
+2025-07-27 21:53:43,279 - src.evaluation - INFO - Random - Avg Reward: -41.158, Success Rate: 0.000
+2025-07-27 21:53:43,279 - src.evaluation - INFO - Evaluating Greedy agent...
+2025-07-27 21:53:43,323 - src.evaluation - INFO - Greedy - Avg Reward: -126.299, Success Rate: 0.000
+2025-07-27 21:53:43,323 - src.evaluation - INFO - Evaluating Heuristic agent...
+2025-07-27 21:53:43,385 - src.evaluation - INFO - Heuristic - Avg Reward: -112.665, Success Rate: 0.000
+2025-07-27 21:53:43,385 - __main__ - INFO - Evaluation completed successfully
+2025-07-27 21:53:43,385 - __main__ - INFO - Generating reports and visualizations...
+2025-07-27 21:53:43,503 - src.visualization - INFO - Saved plot: plots\training_dashboard_training.html
+2025-07-27 21:53:43,536 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:53:43,617 - src.visualization - INFO - Saved plot: plots\training_dashboard_comparison.html
+2025-07-27 21:53:43,627 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:53:43,742 - src.visualization - INFO - Saved plot: plots\training_dashboard_nutrition.html
+2025-07-27 21:53:43,752 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:53:43,804 - src.visualization - INFO - Saved plot: plots\training_dashboard_variety.html
+2025-07-27 21:53:43,824 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:53:43,824 - src.visualization - INFO - Training dashboard created with 4 visualizations
+2025-07-27 21:53:43,866 - src.visualization - INFO - Saved plot: plots\convergence_analysis.html
+2025-07-27 21:53:43,872 - src.visualization - ERROR - Error saving plot in png format: 
+Image export using the "kaleido" engine requires the Kaleido package,
+which can be installed using pip:
+
+    $ pip install --upgrade kaleido
+
+2025-07-27 21:53:43,888 - src.visualization - INFO - Data summary exported to: plots\data_summary.csv
+2025-07-27 21:53:43,896 - __main__ - INFO - Reports generated successfully
+2025-07-27 21:53:43,896 - __main__ - INFO - Training pipeline completed successfully
