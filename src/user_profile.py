@@ -46,13 +46,7 @@ class UserProfile:
     activity_level: ActivityLevel
     
     # Goals and preferences
-    goals: Dict = field(default_factory=lambda: {
-        'weight_goal': Goal.MAINTAIN_WEIGHT,
-        'target_calories': 2000,
-        'protein_ratio': 0.25,
-        'carb_ratio': 0.45,
-        'fat_ratio': 0.30
-    })
+    goals: Dict = field(default_factory=dict)
     
     preferences: Dict = field(default_factory=lambda: {
         'liked_categories': [],
@@ -66,9 +60,17 @@ class UserProfile:
     
     def __post_init__(self):
         """Validate user profile data"""
+        default_goals = {
+            'weight_goal': Goal.MAINTAIN_WEIGHT,
+            'target_calories': None,
+            'protein_ratio': 0.25,
+            'carb_ratio': 0.45,
+            'fat_ratio': 0.30
+        }
+        self.goals = {**default_goals, **self.goals}
+
         self._validate_profile()
         
-        # Calculate and set target calories if not specified
         if self.goals.get('target_calories') is None:
             self.goals['target_calories'] = self.calculate_daily_calories()
     
