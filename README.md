@@ -1,150 +1,116 @@
 # Macronutrient Balancing Planner using Reinforcement Learning
 
-A comprehensive reinforcement learning system for optimal meal planning that balances macronutrients while considering user preferences and nutritional quality.
+A comprehensive reinforcement learning system for optimal meal planning that balances macronutrients while considering user preferences and nutritional quality. (Currently, implemeneted PPO only)
 
 ## 🚀 Features
 
-- **Real-world data integration** with Open Food Facts API (1000+ food items)
-- **PPO reinforcement learning agent** for intelligent meal selection
-- **Comprehensive evaluation metrics** and baseline comparisons
-- **Interactive visualizations** and progress tracking
-- **Flexible configuration management** with YAML
-- **Modular architecture** for easy extension and maintenance
+- **Real-world data integration** with Open Food Facts API (900+ food items)
+- **Hybrid-action PPO agent** for food and portion size selection
+- **Customizable `gymnasium` environment** simulating daily meal progression
+- **Comprehensive evaluation metrics** and baseline agent comparisons (Random, Greedy, Heuristic)
+- **Interactive analysis notebook** (`interactive_analysis.ipynb`) for visualizing results, generating meal plans, and experimenting with user profiles.
+- **Flexible configuration management** with `config.yaml`
+- **Modular and extensible architecture** for easy maintenance and new feature integration.
 
 ## 📁 Project Structure
 
 ```
 ├── config.yaml              # Main configuration file
-├── main.py                   # Main training script
-├── requirements.txt          # Dependencies
-├── src/                      # Source code modules
+├── main.py                  # Main training script
+├── interactive_analysis.ipynb # Interactive notebook for analysis and demos
+├── requirements.txt         # Project dependencies
+├── src/                     # Source code modules
 │   ├── __init__.py          # Package initialization
 │   ├── config.py            # Configuration management
 │   ├── data_loader.py       # Food data and API integration
 │   ├── user_profile.py      # User profile management
-│   ├── environment.py       # RL environment (to be created)
-│   ├── agent.py             # RL agent implementation (to be created)
+│   ├── environment.py       # Custom RL environment
+│   ├── agent.py             # PPO agent implementation
 │   └── evaluation.py        # Evaluation metrics and baselines
-├── cache/                   # Data cache directory
-├── models/                  # Saved model directory
-├── plots/                   # Generated visualizations
-└── logs/                    # Training logs
+├── cache/                   # Cached food database
+├── models/                  # Saved model checkpoints
+├── training.log             # Log file for training sessions
+└── README.md                # This README file
 ```
 
 ## 🛠️ Installation
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/apambalik/Macronutrient-Balancing-Planner-using-RL.git
    cd Macronutrient-Balancing-Planner-using-RL
    ```
 
-2. **Install dependencies**
+2. **Set up a virtual environment (recommended)**
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows, use `.venv\Scripts\activate`
+   ```
+
+3. **Install dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
 ## ⚙️ Configuration
 
-The system uses YAML configuration files for flexible parameter management. The main configuration file is `config.yaml`.
+The system uses `config.yaml` for flexible parameter management. You can adjust reward weights, agent hyperparameters, and training settings in this file.
 
 ### Key Configuration Sections:
 
-- **Data settings**: API configuration, caching, database management
-- **Environment settings**: RL environment parameters, reward weights
-- **Agent settings**: Neural network architecture, learning parameters
-- **Training settings**: Episode counts, update frequency, checkpointing
-- **Evaluation settings**: Metrics, baseline comparisons
-
-### Example Configuration:
-
-```yaml
-# Environment settings
-environment:
-  max_steps_per_episode: 20
-  target_calories: 2000
-  macro_ratios:
-    protein: 0.25
-    carbohydrates: 0.45
-    fat: 0.30
-
-# Training settings
-training:
-  num_episodes: 1000
-  update_frequency: 10
-  batch_size: 64
-```
+- **`data`**: API settings, caching, and database management.
+- **`environment`**: RL environment parameters, reward function weights, and success thresholds.
+- **`agent`**: PPO agent hyperparameters (learning rate, gamma, clipping, etc.) and neural network architecture.
+- **`training`**: Episode counts, update frequencies, and logging settings.
+- **`evaluation`**: Number of episodes for evaluation and baseline agent toggles.
 
 ## 🚀 Usage
 
-### Basic Training
+### 1. Training the Agent
+
+Run the main script to start the training process. This will use the settings from `config.yaml` and save the trained model to the `models/` directory.
 
 ```bash
-python main.py --config config.yaml --mode train
+python main.py
 ```
 
-### Training with Custom Parameters
+You can override configuration settings with command-line arguments:
 
 ```bash
-python main.py --config config.yaml --mode train --episodes 500 --verbose
+# Train for 500 episodes with verbose logging
+python main.py --episodes 500 --verbose
 ```
 
-### Command Line Options
+### 2. Interactive Analysis and Demos
 
-- `--config, -c`: Path to configuration file (default: `config.yaml`)
-- `--mode, -m`: Run mode - `train`, `evaluate`, or `demo` (default: `train`)
-- `--episodes, -e`: Number of training episodes (overrides config)
-- `--seed, -s`: Random seed for reproducibility (default: 42)
-- `--verbose, -v`: Enable verbose logging
-- `--no-baseline`: Skip baseline comparison
-- `--refresh-data`: Force refresh of food database
+The `interactive_analysis.ipynb` notebook is the best way to explore the system's capabilities.
 
-### Training Output
+1. **Launch Jupyter Notebook or Jupyter Lab**:
+   ```bash
+   jupyter notebook
+   # or
+   jupyter lab
+   ```
 
-The system generates:
-- **Training logs** with progress updates
-- **Interactive visualizations** showing training progress
-- **Comparison charts** with baseline agents
-- **Nutritional analysis** of meal plans
-- **Performance metrics** and convergence analysis
+2. **Open `interactive_analysis.ipynb`** and run the cells sequentially.
 
-## 📊 Evaluation Metrics
-
-The system provides comprehensive evaluation metrics:
-
-### Performance Metrics
-- **Average Reward**: Overall performance measure
-- **Success Rate**: Episodes meeting success threshold
-- **Calorie Accuracy**: How well calorie targets are met
-- **Macro Balance Accuracy**: Macronutrient distribution accuracy
-- **Meal Variety**: Diversity of food selections
-- **Nutritional Quality**: Overall nutritional score
-
-### Baseline Comparisons
-- **Random Agent**: Random food selection baseline
-- **Greedy Agent**: Macro-balance focused heuristic
-- **Heuristic Agent**: Rule-based nutrition planning
-
+The notebook allows you to:
+- Visualize the agent's training progress.
+- Compare the RL agent's performance against baseline models.
+- Generate a sample meal plan with detailed nutritional analysis.
+- Explore the food database with interactive charts.
+- Experiment with different user profiles to see how nutritional needs change in real-time.
 
 ## 🧪 Extending the System
 
-### Adding New Agents
-
-1. Create agent class inheriting from base agent interface
-2. Implement required methods (`select_action`, `train`, etc.)
-3. Add agent to configuration and main script
-
-### Adding New Metrics
-
-1. Extend `EvaluationMetrics` class in `src/evaluation.py`
-2. Implement metric calculation methods
-3. Update visualization components
-
 ### Custom User Profiles
+
+You can easily create custom user profiles for the agent to plan for. The `UserProfile` class is robust and handles default values, so you only need to specify what you want to change.
 
 ```python
 from src.user_profile import UserProfile, Gender, ActivityLevel, Goal
 
+# Example of a custom user profile
 profile = UserProfile(
     age=25,
     gender=Gender.FEMALE,
@@ -153,7 +119,6 @@ profile = UserProfile(
     activity_level=ActivityLevel.VERY_ACTIVE,
     goals={
         'weight_goal': Goal.LOSE_WEIGHT,
-        'target_calories': 1800,
         'protein_ratio': 0.30,
         'carb_ratio': 0.40,
         'fat_ratio': 0.30
@@ -161,25 +126,16 @@ profile = UserProfile(
 )
 ```
 
-## 🔧 Development
-
 ### Adding New Features
 
-1. **Data Sources**: Extend `data_loader.py` for new nutrition APIs
-2. **Environments**: Implement custom RL environments in `environment.py`
-3. **Agents**: Add new RL algorithms in `agent.py`
+- **Data Sources**: Extend `data_loader.py` to connect to new nutrition APIs.
+- **Reward Functions**: Modify the `_calculate_reward` method in `src/environment.py` to change the agent's learning incentives.
+- **Agents**: Add new RL algorithms by creating new agent classes in `agent.py` that conform to the expected interface.
 
-### Testing
+## 🔧 Development and Debugging
 
-```bash
-# Run with mock components for testing
-python main.py --episodes 10 --verbose
-```
-
-### Debugging
-
-Enable verbose logging and check log files:
-```bash
-python main.py --verbose
-# Check logs in training.log
-```
+- **Enable verbose logging** during training to see detailed output from the agent and environment:
+  ```bash
+  python main.py --verbose
+  ```
+- **Check `training.log`** for a persistent record of the training session.
